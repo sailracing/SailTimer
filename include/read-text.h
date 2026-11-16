@@ -1,0 +1,1 @@
+char *read_text_file(const char *filename);
