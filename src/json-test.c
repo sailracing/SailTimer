@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <read-text.h>
-#include <json.h>
+#include <cJSON.h>
 
 int main() {
     // Read the JSON file into a string
