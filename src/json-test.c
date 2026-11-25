@@ -31,6 +31,8 @@ int main() {
         return 1;
     }
 
+    fprintf(stdout, "Parsed JSON:\n%s\n", print_string);
+
     // Don't forget to free the allocated memory
     free(json_string);
     free(print_string);
