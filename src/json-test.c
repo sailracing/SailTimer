@@ -3,8 +3,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "read-text.h"
-#include "json.h"
+#include <read-text.h>
+#include <json.h>
 
 int main() {
     // Read the JSON file into a string
