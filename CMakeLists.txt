@@ -5,12 +5,28 @@ project(SailTimer C)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
-# Header files
-include_directories(${PROJECT_SOURCE_DIR}/include)
+# Project headers
+target_include_directories(json-test PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+)
 
-# Build executable
-add_executable(
-    json-test
+# Find cJSON installed from apt
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(CJSON REQUIRED libcjson)
+
+# Executable
+add_executable(json-test
     src/json-test.c
     src/read-text.c
+)
+
+# Include paths
+target_include_directories(json-test PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+    ${CJSON_INCLUDE_DIRS}
+)
+
+# Link libraries
+target_link_libraries(json-test PRIVATE
+    ${CJSON_LIBRARIES}
 )
