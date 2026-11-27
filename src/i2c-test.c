@@ -37,7 +37,7 @@ int main()
         return 1;
     }
 
-    buffer[0] = 0x12; // Example data to write
+    buffer[0] = 0x13; // Example data to write
 
     result = write_bytes(i2c_file, buffer, 1);
     if (result < 0)
