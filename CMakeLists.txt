@@ -15,6 +15,12 @@ add_executable(json-test
     src/read-text.c
 )
 
+# I2C test executable
+add_executable(i2c-test
+    src/i2c-test.c
+    src/i2c-driver.c
+)
+
 # Include paths
 target_include_directories(json-test PRIVATE
     ${PROJECT_SOURCE_DIR}/include
@@ -30,3 +36,8 @@ target_link_libraries(json-test PRIVATE
 target_include_directories(json-test PRIVATE
     ${PROJECT_SOURCE_DIR}/include
 )
+
+target_include_directories(i2c-test PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+)
+
