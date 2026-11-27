@@ -17,8 +17,9 @@ int main()
         return 1;
     }
 
+    // set the pullups on for the top three bits of port B
     buffer[0] = 0x0C; // Example data to write
-    buffer[1] = 0xFF; // Example data to write
+    buffer[1] = 0xE0; // Example data to write
 
     result = write_bytes(i2c_file, buffer, 2);
     if (result < 0)
@@ -27,8 +28,9 @@ int main()
         return 1;
     }
 
-    buffer[0] = 0x0D; // Example data to write
-    buffer[1] = 0xFF; // Example data to write
+    // invert the top three bits of port B
+    buffer[0] = 0x03; // Example data to write
+    buffer[1] = 0xE0; // Example data to write
 
     result = write_bytes(i2c_file, buffer, 2);
     if (result < 0)
@@ -52,7 +54,9 @@ int main()
         return 1;
     }
     
-    fprintf(stdout, "GPIO A value: 0x%02X\n", buffer[0]);
+    buffer[0] = buffer[0] >> 5; // shift the top three bits down to the bottom three bits
+    
+    fprintf(stdout, "Switch values: 0X%02X\n", buffer[0]);
 
     // Close the I2C device
     close_device(i2c_file);
