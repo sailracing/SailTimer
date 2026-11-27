@@ -8,7 +8,7 @@
 
 int main() {
     // Read the JSON file into a string
-    char *json_string = read_text_file("mode-library.json");
+    char *json_string = read_text_file("../mode-files/mode-library.json");
     if (json_string == NULL) {
         fprintf(stderr, "Failed to read JSON file.\n");
         return 1;
