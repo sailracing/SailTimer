@@ -8,6 +8,7 @@ int main()
 	unsigned char buffer[60] = {0};
     int i2c_file;
     int result;
+    int i;
 
     // Open the I2C device
     i2c_file = open_device(I2C_DEVICE_ADDRESS);
@@ -69,14 +70,33 @@ int main()
     
     fprintf(stdout, "Switch values: 0X%02X\n", buffer[0]);
 
-    // test the outputs
-    buffer[0] = 0x13; // address of GPIO B data register
-    buffer[1] = 0x03; // set the two lsbs to high
-    result = write_bytes(i2c_file, buffer, 2);
-    if (result < 0)
+    for(int i = 0; i < 3; i++)
     {
-        fprintf(stderr, "Failed to write to outputs of GPIO B.\n");
-        return 1;
+    
+        // test the outputs
+        buffer[0] = 0x13; // address of GPIO B data register
+        buffer[1] = 0x03; // set the two lsbs to high
+        result = write_bytes(i2c_file, buffer, 2);
+        if (result < 0)
+        {
+            fprintf(stderr, "Failed to write to outputs of GPIO B.\n");
+            return 1;
+        }
+
+        sleep(1); // wait for 1 second
+
+        // turn off the outputs
+        buffer[0] = 0x13; // address of GPIO B data register
+        buffer[1] = 0x00; // set the two lsbs to low
+        result = write_bytes(i2c_file, buffer, 2);
+        if (result < 0)
+        {
+            fprintf(stderr, "Failed to write to outputs of GPIO B.\n");
+            return 1;
+        }
+
+        sleep(1); // wait for 1 second
+
     }
 
     // Close the I2C device
