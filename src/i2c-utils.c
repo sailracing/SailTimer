@@ -73,7 +73,7 @@ int horn(int i2c_file, unsigned char horn_command)
         return -1;
     }
 
-    buffer[1] = ((buffer[0] && 0xFE) || horn_command); // Set the LSB to horn_command while keeping other bits unchanged
+    buffer[1] = ((buffer[0] & 0xFE) | horn_command); // Set the LSB to horn_command while keeping other bits unchanged
     buffer[0] = 0x13; // address of GPIO B data register
 
     result = write_bytes(i2c_file, buffer, 2);
@@ -107,7 +107,7 @@ int buzzer(int i2c_file, unsigned char buzzer_command)
         return -1;
     }
 
-    buffer[1] = ((buffer[0] && 0xFD) || buzzer_command); // Set the second bit to buzzer_command while keeping other bits unchanged
+    buffer[1] = ((buffer[0] & 0xFD) | buzzer_command); // Set the second bit to buzzer_command while keeping other bits unchanged
     buffer[0] = 0x13; // address of GPIO B data register
 
     result = write_bytes(i2c_file, buffer, 2);
