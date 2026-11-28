@@ -41,3 +41,13 @@ target_include_directories(i2c-test PRIVATE
     ${PROJECT_SOURCE_DIR}/include
 )
 
+# I2C utilities test executable
+add_executable(i2c-utils-test
+    src/i2c-utils-test.c
+    src/i2c-utils.c
+    src/i2c-driver.c
+)
+
+target_include_directories(i2c-utils-test PRIVATE
+    ${PROJECT_SOURCE_DIR}/include
+)
