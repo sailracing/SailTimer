@@ -66,12 +66,19 @@ int horn(int i2c_file, unsigned char horn_command)
         return -1;
     }
 
+    result = read_bytes(i2c_file, buffer, 1);
+    if (result < 0)
+    {
+        fprintf(stderr, "Failed to read from address during horn command.\n");
+        return -1;
+    }
+
     buffer[0] = ((buffer[0] & 0xFE) | horn_command); // Set the LSB to horn_command while keeping other bits unchanged
 
     result = write_bytes(i2c_file, buffer, 1);
     if (result < 0)
     {
-        fprintf(stderr, "Failed to write to turn execute horn command.\n");
+        fprintf(stderr, "Failed to write to execute horn command.\n");
         return -1;
     }
 
@@ -92,12 +99,19 @@ int buzzer(int i2c_file, unsigned char buzzer_command)
         return -1;
     }
 
+    result = read_bytes(i2c_file, buffer, 1);
+    if (result < 0)
+    {
+        fprintf(stderr, "Failed to read from address during buzzer command.\n");
+        return -1;
+    }
+
     buffer[0] = ((buffer[0] & 0xFD) | buzzer_command); // Set the second bit to buzzer_command while keeping other bits unchanged
 
     result = write_bytes(i2c_file, buffer, 1);
     if (result < 0)
     {
-        fprintf(stderr, "Failed to write to turn execute buzzer command.\n");
+        fprintf(stderr, "Failed to write to execute buzzer command.\n");
         return -1;
     }
 
